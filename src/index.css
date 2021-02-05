@@ -1,13 +1,167 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.videoContainer video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.videoContainer h1 {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 72px;
+}
+
+.videoContainer button {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 350px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    background-color: #075A46;
+    font-size: 32px;
+    border-radius: 50px;
+    border: none;
+    transition-duration: 0.4s;
+}
+
+.videoContainer button:active {
+    background-color: #053f36;
+    box-shadow:  3px #2b2d2f;
+}
+
+.registrationHeader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 200px;
+    background-color: #075A46;
+}
+
+.registrationHeader h1 {
+    text-align: center;
+    vertical-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 48px;
+}
+
+
+
+.input {
+    
+    position: absolute;
+    
+}
+
+.input1, .input2, .input3 {
+    left: 30%;
+}
+
+.input4, .input5, .input6 {
+    left: 60%;
+}
+
+.input1 {
+    top: 300px;
+}
+
+.input2 {
+    top: 400px;
+}
+
+.input3 {
+    top: 500px;
+}
+
+.input4 {
+    top: 300px;
+}
+
+.input5 {
+    top: 400px;
+  
+}
+
+.input6 {
+    top: 500px;
+  
+}
+
+.inputContainer {
+
+    border: #000000;
+    border-style: solid;
+    
+}
+
+.inputContainer img{
+    position: absolute;
+    
+}
+
+.img1 {
+    top: 290px;
+    left: 26%;
+    width: 44;
+    height: 31;
+}
+
+.img2 {
+    top: 390px;
+    left: 26%;
+    width: 35;
+    height: 35;
+}
+
+.img3 {
+    top: 490px;
+    left: 26%;
+    width: 42;
+    height: 42;
+}
+
+.img4 {
+    top: 290px;
+    left: 56%;
+    width: 38;
+    height: 27;
+}
+
+.img5 {
+    top: 390px;
+    left: 56%;
+    width: 33;
+    height: 39;
+}
+
+.img6 {
+    top: 490px;
+    left: 56%;
+    width: 44;
+    height: 31;
+}
+
+.registrationContainer button {
+    position: absolute;
+
+    width: 350px;
+    height: 100px;
+    color: #ffffff;
+    background-color: #075A46;
+    font-size: 32px;
+    border-radius: 50px;
+    border: none;
+    transition-duration: 0.4s;
+    margin: 0;
+    top: 70%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
