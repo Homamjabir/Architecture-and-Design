@@ -8,18 +8,18 @@ import userNameIcon from "./images/Username-Icon.png"
 function signUp() {
   var firstName = document.getElementById("firstName").value;
   var lastName = document.getElementById("lastName").value;
-  var userName = document.getElementById("userName").value;
+  var username = document.getElementById("userName").value;
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
-  var ssn = document.getElementById("ssn").value;
+  var dob = document.getElementById("dob").value;
 
   var jsonForRealAPI = {
     "firstName":firstName,
     "lastName":lastName,
-    "userName":userName,
     "email":email,
-    "password":password,
-    "ssn":ssn
+    "dob":dob,
+    "username":username,
+    "password":password
   }
 
   var jsonForTestAPI = {
@@ -27,12 +27,12 @@ function signUp() {
     "email":email
   }
 
-  fetch("http://localhost:8000/api/applicant", {
+  fetch("http://localhost:5000/api/applicant/signup", {
     method: "POST",
     headers: {
       "Content-Type":"application/json"
     },
-    body: JSON.stringify(jsonForTestAPI)
+    body: JSON.stringify(jsonForRealAPI)
   },
   ).then(response => response.json()).then(data => console.log(data));
 }
@@ -71,7 +71,7 @@ class Registration extends Component {
               </div>
               <div>
                 <img className = "img6" src={fullNameIcon} width="44" height="31"/>
-                <input className = "input input6" id = "ssn" placeholder = "Personal identity number"></input>
+                <input className = "input input6" id = "dob" placeholder = "Personal identity number"></input>
               </div> 
             </div>
 
