@@ -52,116 +52,39 @@
     font-size: 48px;
 }
 
-
-
-.input {
-    
-    position: absolute;
-    
-}
-
-.input1, .input2, .input3 {
-    left: 30%;
-}
-
-.input4, .input5, .input6 {
-    left: 60%;
-}
-
-.input1 {
-    top: 300px;
-}
-
-.input2 {
-    top: 400px;
-}
-
-.input3 {
-    top: 500px;
-}
-
-.input4 {
-    top: 300px;
-}
-
-.input5 {
-    top: 400px;
-  
-}
-
-.input6 {
-    top: 500px;
-  
-}
-
 .inputContainer {
-
-    border: #000000;
-    border-style: solid;
+    position: relative;
+    margin: auto;
+    margin-top: 400px;
+    width: 400px;
+    min-height: 200px;
+    padding: 10px;
+    
     
 }
 
-.inputContainer img{
-    position: absolute;
-    
-}
+.column {
+    float: left;
+    width: 50%;
+  }
 
-.img1 {
-    top: 290px;
-    left: 26%;
-    width: 44;
-    height: 31;
-}
 
-.img2 {
-    top: 390px;
-    left: 26%;
-    width: 35;
-    height: 35;
-}
-
-.img3 {
-    top: 490px;
-    left: 26%;
-    width: 42;
-    height: 42;
-}
-
-.img4 {
-    top: 290px;
-    left: 56%;
-    width: 38;
-    height: 27;
-}
-
-.img5 {
-    top: 390px;
-    left: 56%;
-    width: 33;
-    height: 39;
-}
-
-.img6 {
-    top: 490px;
-    left: 56%;
-    width: 44;
-    height: 31;
-}
-
-.registrationContainer button {
-    position: absolute;
-
-    width: 350px;
-    height: 100px;
-    color: #ffffff;
+.inputContainer #btn {
+    margin:0 auto;
+    display:block;
     background-color: #075A46;
-    font-size: 32px;
+    color: white;
     border-radius: 50px;
+    margin-top: 500px;
     border: none;
-    transition-duration: 0.4s;
-    margin: 0;
-    top: 70%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    min-width: 200px;
+    min-height: 50px;
+    
+}
+
+.form{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    padding-top: 25px;
 }

@@ -1,84 +1,161 @@
-import React, { Component } from "react";
-import emailIcon from "./images/Email-Icon.jpg";
-import fullNameIcon from "./images/Full-Name-Icon.png";
-import passwordIcon from "./images/Password-Icon.png";
-import phoneNumberIcon from "./images/Phone-Number-Icon.png";
-import userNameIcon from "./images/Username-Icon.png"
+import React, { useState } from "react";
 
-function signUp() {
-  var firstName = document.getElementById("firstName").value;
-  var lastName = document.getElementById("lastName").value;
-  var userName = document.getElementById("userName").value;
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("password").value;
-  var ssn = document.getElementById("ssn").value;
+const Registration = () => {
 
-  var jsonForRealAPI = {
-    "firstName":firstName,
-    "lastName":lastName,
-    "userName":userName,
-    "email":email,
-    "password":password,
-    "ssn":ssn
-  }
+  const[email, setEmail] = useState("");
+  const[username, setUsername] = useState("");
+  const[password, setPassword] = useState("");
+  const[firstname, setFirstname] = useState("");
+  const[lastname, setLastname] = useState("");
+  const[dob, setDob] = useState("");
 
-  var jsonForTestAPI = {
-    "name":firstName + " " + lastName,
-    "email":email
-  }
-
-  fetch("http://localhost:8000/api/applicant", {
-    method: "POST",
-    headers: {
-      "Content-Type":"application/json"
-    },
-    body: JSON.stringify(jsonForTestAPI)
-  },
-  ).then(response => response.json()).then(data => console.log(data));
-}
-                                   
-
-class Registration extends Component {
-    render() {
-      return (
-          <div className = "registrationContainer">
-            <div className = "registrationHeader">
-              <h1>
-                Registration Page
-              </h1>
-            </div>
-
-            <div className = "inputContainer" >
-              <div>
-                <img className = "img1" src={fullNameIcon} width="44" height="31"/>
-                <input className = "input input1" id = "firstName" placeholder = "First Name"></input>
-              </div>
-              <div>
-                <img className = "img2" src={phoneNumberIcon} width="35" height="35"/>
-                <input className = "input input2" id = "lastName" placeholder = "Last Name"></input>
-              </div>
-              <div>
-                <img className = "img3" src={userNameIcon} width="42" height="42"/>
-                <input className = "input input3" id = "userName" placeholder = "Username"></input>
-              </div>
-              <div>
-                <img className = "img4" src={emailIcon} width="38" height="27"/>
-                <input className = "input input4" id = "email" placeholder = "Email"></input>
-              </div>
-              <div>
-                <img className = "img5" src={passwordIcon} width="33" height="39"/>
-                <input className = "input input5" id = "password" placeholder = "Password"></input>
-              </div>
-              <div>
-                <img className = "img6" src={fullNameIcon} width="44" height="31"/>
-                <input className = "input input6" id = "ssn" placeholder = "Personal identity number"></input>
-              </div> 
-            </div>
-
-            <button type="button" onClick={()=>console.log(signUp())}>Sign Up</button>
-          </div>
-      );
+  const onChange = event => {
+    switch(event.target.name) {
+      case "email":
+        setEmail(event.target.value);
+        break;
+      case "username":
+        setUsername(event.target.value);
+        break;
+      case "password":
+        setPassword(event.target.value);
+        break;
+      case "firstname":
+        setFirstname(event.target.value);
+        break;
+      case "lastname":
+        setLastname(event.target.value);
+        break;
+      case "dob":
+        setDob(event.target.value);
+        break;
     }
   }
+
+  const signUp = () => {
+    
+    var jsonForRealAPI = {
+      "firstname":firstname,
+      "lastname":lastname,
+      "username":username,
+      "email":email,
+      "password":password,
+      "dob":dob
+    }
+
+    if(validateInput(jsonForRealAPI))
+      console.log(jsonForRealAPI)
+
+      
+    /*fetch("http://localhost:8000/api/applicant", {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(jsonForRealAPI)
+    },
+    ).then(response => response.json()).then(data => console.log(data));*/
+
+    
+  }
+
+  const validateInput = (jsonClientData) => {
+    if((jsonClientData.firstname === "") || 
+        (jsonClientData.lastname === "") || 
+        (jsonClientData.username === "") || 
+        (jsonClientData.password === "") || 
+        (jsonClientData.dob === "") || 
+        !(validateEmail(jsonClientData.email)))
+      return false;
+
+    return true;
+  }
+
+  const validateEmail = (clientEmail) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(clientEmail).toLowerCase());
+  }
+
+  return (
+      <div className = "registrationContainer">
+        <div className = "registrationHeader">
+          <h1>
+            Registration Page
+          </h1>
+        </div>
+
+        <div className = "inputContainer">
+          <form className = "inputForm">
+            <div className = "column">
+              <div>
+                <input
+                    name="email"
+                    type="email"
+                    required
+                    className = "form"
+                    onChange={onChange}
+                    placeholder="Email Address"
+                />
+              </div>
+              <div>
+                <input 
+                    name="username"
+                    type="text"
+                    required
+                    className = "form"
+                    onChange={onChange}
+                    placeholder="Username"
+                />
+              </div>
+              <div>
+                <input 
+                    name="password"
+                    type="password"
+                    required
+                    className = "form"
+                    onChange={onChange}
+                    placeholder="Password"
+                />
+              </div>
+            </div>
+            <div></div>
+            <div className = "column">
+              <div>
+                <input 
+                    name="firstname"
+                    type="text"
+                    required
+                    className = "form"
+                    onChange={onChange}
+                    placeholder="Firstname"
+                />
+              </div>
+              <div>
+                <input 
+                    name="lastname"
+                    type="text"
+                    required
+                    className = "form"
+                    onChange={onChange}
+                    placeholder="Lastame"
+                />
+              </div>
+              <div>
+                <input 
+                    name="dob"
+                    type="text"
+                    required
+                    className = "form"
+                    onChange={onChange}
+                    placeholder="Date of Birth"
+                />
+              </div>
+            </div>
+            <input id = "btn" type="submit"onClick={()=>signUp()}></input>
+          </form>
+        </div>
+      </div>
+  );
+}
  
 export default Registration;
