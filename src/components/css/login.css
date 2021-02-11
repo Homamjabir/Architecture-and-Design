@@ -1,0 +1,25 @@
+.loginFormContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
+    border: 3px solid green;
+    padding: 10px;
+    border-style: solid;
+}
+
+
+.loginContainer button {
+
+    background-color: #075A46;
+    margin: 0 auto;
+    display: block;
+    min-width: 200px;
+    min-height: 50px;
+    
+}
+
+.loginContainer p {
+    text-align: center;
+}
+
