@@ -72,7 +72,7 @@ const Registration = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik01">
+                <Form.Group as={Col} md="6" controlId="validationFormik02">
                   <Form.Label>Last name</Form.Label>
                   <Form.Control
                     type="text"
@@ -93,7 +93,7 @@ const Registration = () => {
 
               <Form.Row>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik01">
+                <Form.Group as={Col} md="6" controlId="validationFormik03">
                   <Form.Label>Date of Birth</Form.Label>
                   <Form.Control
                     type="text"
@@ -109,7 +109,7 @@ const Registration = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik01">
+                <Form.Group as={Col} md="6" controlId="validationFormik04">
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="text"
@@ -129,7 +129,7 @@ const Registration = () => {
 
               <Form.Row>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik01">
+                <Form.Group as={Col} md="6" controlId="validationFormik05">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
@@ -145,7 +145,7 @@ const Registration = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik01">
+                <Form.Group as={Col} md="6" controlId="validationFormik06">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
