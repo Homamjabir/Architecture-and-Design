@@ -1,0 +1,13 @@
+.headerContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100px;
+    background-color: #075A46;
+}
+
+.navbar {
+    background-color: #075A46;
+    color: white;
+}
