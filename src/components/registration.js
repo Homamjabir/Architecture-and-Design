@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Form'
@@ -11,12 +11,20 @@ import "./css/registration.css"
 
 const Registration = () => {
 
+  const [initialValues, setInitialValues] = useState({
+    firstName: '',
+    lastName: '',
+    dob: '',
+    username: '',
+    email: '',
+    password: ''
+  });
 
 
-  const onSuasdbmit = (data) => {
 
-    
-    ApiCall("POST", "api/applicant/signup", data)
+  const onSubmit = (values, {resetForm}) => {
+    ApiCall("POST", "api/applicant/signup", values)
+    resetForm({})
    
   }
 
@@ -25,7 +33,7 @@ const Registration = () => {
     lastName: yup.string().required(),
     dob: yup.string().required(),
     username: yup.string().required(),
-    email: yup.string().required(),
+    email: yup.string().email('Invalid email').required('Required'),
     password: yup.string().required(),
   });
 
@@ -35,23 +43,17 @@ const Registration = () => {
     <div className="registrationContainer">
       <div className="registrationFormContainer">
         <Formik
+          enableReinitialize={false}
           validationSchema={schema}
-          onSubmit={onSuasdbmit}
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            dob: '',
-            username: '',
-            email: '',
-            password: ''
-          }}
+          onSubmit={onSubmit}
+          initialValues={initialValues}
         >
           {({
             handleSubmit,
             handleChange,
             values,
             errors,
-          }) => (
+            }) => (
             <Form noValidate onSubmit={handleSubmit}>
 
               <Form.Row>
@@ -80,7 +82,7 @@ const Registration = () => {
                     name="lastName"
                     value={values.lastName}
                     onChange={handleChange}
-                    isInvalid={!!errors.lastName}
+                    isInvalid={errors.lastName}
                   />
 
                   <Form.Control.Feedback type="invalid">

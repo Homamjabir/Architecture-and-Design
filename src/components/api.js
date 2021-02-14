@@ -1,5 +1,3 @@
-
-
 const ApiCall = (httpMethod, location, JSONdata) => {
       console.log("123")
       fetch("http://localhost:8000/" + location, {
