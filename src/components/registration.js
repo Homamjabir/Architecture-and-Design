@@ -20,12 +20,21 @@ const Registration = () => {
     password: ''
   });
 
+  const onChange = (event) => {
+    setInitialValues(prevState =>  ({
+      ...prevState,
+      [event.target.name] : event.target.value
+    }))
+  };  
+
 
 
   const onSubmit = (values, {resetForm}) => {
+    
     ApiCall("POST", "api/applicant/signup", values)
     resetForm({})
-   
+
+
   }
 
   const schema = yup.object().shape({
@@ -43,30 +52,29 @@ const Registration = () => {
     <div className="registrationContainer">
       <div className="registrationFormContainer">
         <Formik
-          enableReinitialize={false}
+          enableReinitialize={true}
           validationSchema={schema}
           onSubmit={onSubmit}
+          onChange={onChange}
           initialValues={initialValues}
         >
           {({
             handleSubmit,
-            handleChange,
-            values,
             errors,
             }) => (
             <Form noValidate onSubmit={handleSubmit}>
 
               <Form.Row>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik01">
+              <Form.Group as={Col} md="6" >
                   <Form.Label>First name</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="First Name"
                     name="firstName"
-                    value={values.firstName}
-                    onChange={handleChange}
-                    isInvalid={!!errors.firstName}
+                    defaultValue={initialValues.firstName}
+                    onChange={onChange}
+                    isInvalid={errors.firstName}
                   />
 
                   <Form.Control.Feedback type="invalid">
@@ -74,14 +82,14 @@ const Registration = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik02">
+                <Form.Group as={Col} md="6" >
                   <Form.Label>Last name</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Last Name"
                     name="lastName"
-                    value={values.lastName}
-                    onChange={handleChange}
+                    defaultValue={initialValues.lastName}
+                    onChange={onChange}
                     isInvalid={errors.lastName}
                   />
 
@@ -95,14 +103,14 @@ const Registration = () => {
 
               <Form.Row>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik03">
+                <Form.Group as={Col} md="6" >
                   <Form.Label>Date of Birth</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Date of Birth"
                     name="dob"
-                    value={values.dob}
-                    onChange={handleChange}
+                    defaultValue={initialValues.dob}
+                    onChange={onChange}
                     isInvalid={!!errors.dob}
                   />
 
@@ -111,14 +119,14 @@ const Registration = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik04">
+                <Form.Group as={Col} md="6" >
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Username"
                     name="username"
-                    value={values.username}
-                    onChange={handleChange}
+                    defaultValue={initialValues.username}
+                    onChange={onChange}
                     isInvalid={!!errors.username}
                   />
 
@@ -131,14 +139,14 @@ const Registration = () => {
 
               <Form.Row>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik05">
+                <Form.Group as={Col} md="6" >
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
                     placeholder="Email"
                     name="email"
-                    value={values.email}
-                    onChange={handleChange}
+                    defaultValue={initialValues.email}
+                    onChange={onChange}
                     isInvalid={!!errors.email}
                   />
 
@@ -147,14 +155,14 @@ const Registration = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik06">
+                <Form.Group as={Col} md="6" >
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Password"
                     name="password"
-                    value={values.password}
-                    onChange={handleChange}
+                    defaultValue={initialValues.password}
+                    onChange={onChange}
                     isInvalid={!!errors.password}
                   />
 
