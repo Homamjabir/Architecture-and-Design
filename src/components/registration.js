@@ -20,6 +20,10 @@ const Registration = () => {
     password: ''
   });
 
+  /**
+   * Uppdates the state that has changed
+   * @param {event} event 
+   */
   const onChange = (event) => {
     setInitialValues(prevState =>  ({
       ...prevState,
@@ -27,14 +31,30 @@ const Registration = () => {
     }))
   };  
 
+  const reset = () => {
+    setInitialValues(prevState => ({
+      ...prevState,
+      firstName: '',
+      lastName: '',
+      dob: '',
+      username: '',
+      email: '',
+      password: ''
+    }))
+  }
 
-
-  const onSubmit = (values, {resetForm}) => {
-    
-    ApiCall("POST", "api/applicant/signup", values)
-    resetForm({})
-
-
+  /**
+   * Makes a signup request with the recevied values
+   * and displays the result to the user in an alert
+   * @param {JSON} values 
+   */
+  const onSubmit = (values) => {
+    ApiCall("POST", "api/applicant/signup", values).then(response => {
+      alert("registration succesfull");
+    }).catch(error => {
+      alert(error.message.split(".")[1]);
+    })
+ 
   }
 
   const schema = yup.object().shape({
@@ -45,8 +65,6 @@ const Registration = () => {
     email: yup.string().email('Invalid email').required('Required'),
     password: yup.string().required(),
   });
-
-
   
   return (
     <div className="registrationContainer">

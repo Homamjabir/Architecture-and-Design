@@ -15,28 +15,31 @@ const Login = () => {
     password: ''
   });
 
-  const onChange = (event) => {
+  const onChange = event => {
     setInitialValues(prevState =>  ({
       ...prevState,
       [event.target.name] : event.target.value
     }))
   };  
 
-
-
   const onSubmit = (values, {resetForm}) => {
-    ApiCall("POST", "api/applicant/login", values)
-    resetForm({})
+    ApiCall("POST", "api/applicant/login", values).then(response => {
+      alert("login succesfull");
+    }).catch(error => {
+      alert(error.message.split(".")[1]);
+    })
+    //resetForm({})
   }
 
   const schema = yup.object().shape({
-    email: yup.string().required(),
+    username: yup.string().required(),
     password: yup.string().required(),
   });
 
 
   return (
     <div className="loginContainer">
+
       <div className="loginFormContainer">
         <Formik
           enableReinitialize={true}
