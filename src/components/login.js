@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Form'
@@ -10,16 +10,27 @@ import "./css/login.css"
 
 const Login = () => {
 
+  const [initialValues, setInitialValues] = useState({
+    username: '',
+    password: ''
+  });
 
-  const onSuasdbmit = (data) => {
+  const onChange = (event) => {
+    setInitialValues(prevState =>  ({
+      ...prevState,
+      [event.target.name] : event.target.value
+    }))
+  };  
 
-    
-    ApiCall("POST", "api/applicant/login", data)
-   
+
+
+  const onSubmit = (values, {resetForm}) => {
+    ApiCall("POST", "api/applicant/login", values)
+    resetForm({})
   }
 
   const schema = yup.object().shape({
-    username: yup.string().required(),
+    email: yup.string().required(),
     password: yup.string().required(),
   });
 
@@ -28,49 +39,45 @@ const Login = () => {
     <div className="loginContainer">
       <div className="loginFormContainer">
         <Formik
+          enableReinitialize={true}
           validationSchema={schema}
-          onSubmit={onSuasdbmit}
-          initialValues={{
-            username: '',
-            password: ''
-          }}
+          onSubmit={onSubmit}
+          onChange={onChange}
+          initialValues={initialValues}
         >
           {({
             handleSubmit,
-            handleChange,
-            values,
             errors,
           }) => (
             <Form noValidate onSubmit={handleSubmit}>
 
               <Form.Row>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik01">
-
+                <Form.Group as={Col} md="6" >
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Username"
                     name="username"
-                    value={values.username}
-                    onChange={handleChange}
+                    defaultValue={initialValues.username}
+                    onChange={onChange}
                     isInvalid={!!errors.username}
                   />
 
                   <Form.Control.Feedback type="invalid">
                     {errors.username}
                   </Form.Control.Feedback>
-
                 </Form.Group>
 
-                <Form.Group as={Col} md="6" controlId="validationFormik01">
+
+                <Form.Group as={Col} md="6" >
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Password"
                     name="password"
-                    value={values.password}
-                    onChange={handleChange}
+                    defaultValue={initialValues.password}
+                    onChange={onChange}
                     isInvalid={!!errors.password}
                   />
 

@@ -7,7 +7,16 @@ const ApiCall = (httpMethod, location, JSONdata) => {
         },
         body: JSON.stringify(JSONdata)
       },
-      ).then(response => response.json()).then(data => console.log(data));
+      ).then(response => {
+          if(response.status === 200) 
+            return response.json();
+          else {
+            throw Error(response.message)
+          }
+      }).then(data => console.log(data)
+      ).catch((error) => {
+        console.log("poop" + error.message)
+      });
 }
 
 export default ApiCall;
