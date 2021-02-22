@@ -6,7 +6,7 @@
  */
 const ApiCall = (httpMethod, location, JSONdata) => {
 
-  return fetch("http://localhost:8000/" + location, {
+  return fetch("http://localhost:5000/" + location, {
     method: httpMethod,
     headers: {
       "Content-Type":"application/json"

@@ -52,7 +52,7 @@ const Registration = () => {
     ApiCall("POST", "api/applicant/signup", values).then(response => {
       alert("registration succesfull");
     }).catch(error => {
-      alert(error.message.split(".")[1]);
+      alert(error.message);
     })
  
   }
