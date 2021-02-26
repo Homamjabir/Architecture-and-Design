@@ -31,39 +31,27 @@ const Registration = () => {
     }))
   };  
 
-  const reset = () => {
-    setInitialValues(prevState => ({
-      ...prevState,
-      firstName: '',
-      lastName: '',
-      dob: '',
-      username: '',
-      email: '',
-      password: ''
-    }))
-  }
-
   /**
    * Makes a signup request with the recevied values
    * and displays the result to the user in an alert
    * @param {JSON} values 
    */
   const onSubmit = (values) => {
-    ApiCall("POST", "api/applicant/signup", values).then(response => {
+    /*    ApiCall("POST", "api/applicant/signup", values).then(response => {
       alert("registration succesfull");
     }).catch(error => {
       alert(error.message);
-    })
+    })*/
  
   }
 
   const schema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
-    dob: yup.string().required(),
-    username: yup.string().required(),
-    email: yup.string().email('Invalid email').required('Required'),
-    password: yup.string().required(),
+    firstName: yup.string().required("First name required"),
+    lastName: yup.string().required("Last name required"),
+    dob: yup.number("Enter a number").required("Date of birth required").positive("Positive number").integer("Number").min(12, "12 digits").max(12, "12 digits"),
+    username: yup.string().required("Username required"),
+    email: yup.string().email('Invalid email').required('Email required'),
+    password: yup.string().required("Password requierd"),
   });
   
   return (

@@ -8,13 +8,17 @@ import * as yup from 'yup';
 import  ApiCall  from "./api"
 import "./css/login.css"
 
-const Login = () => {
+const Login = ({setSessionToken}) => {
 
   const [initialValues, setInitialValues] = useState({
     username: '',
     password: ''
   });
 
+  /**
+   * Sets the new value
+   * @param {JSON} event 
+   */
   const onChange = event => {
     setInitialValues(prevState =>  ({
       ...prevState,
@@ -22,16 +26,23 @@ const Login = () => {
     }))
   };  
 
-  const onSubmit = (values, {resetForm}) => {
+  /**
+   * Called when user submits
+   * @param {JSON} values 
+   */
+  const onSubmit = (values) => {
+    setSessionToken("tjena")
     ApiCall("POST", "api/applicant/login", values).then(response => {
       alert("login succesfull");
+      setSessionToken(response.TOKEN)
       console.log(response)
     }).catch(error => {
-      alert(error.message);
+      alert("invalid username or password");
     })
-    //resetForm({})
+    
   }
 
+  
   const schema = yup.object().shape({
     username: yup.string().required(),
     password: yup.string().required(),

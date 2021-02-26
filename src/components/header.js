@@ -1,14 +1,29 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import  ApiCall  from "./api"
 import "./css/header.css"
 
 
-const Header = () =>  {
+const Header = ({sessionToken}) =>  {
+        const history = useHistory();
+
+        /**
+         * Check if client is authorized
+         */
+        const authorize = () => {
+            console.log(sessionToken)
+            
+            // ApiCall("POST", "api/applicant/myapplication", null, sessionToken).then(response => {
+            //     history.push('/application')
+            // }).catch(error => {
+            //     alert("Unauthorized");
+            // })
+        }
     
         if(window.location.pathname === '/')
             return null;
-
         else 
             return (
                 <div className = "headerContainer">
@@ -20,7 +35,7 @@ const Header = () =>  {
                                 <Nav.Link href="/">Home</Nav.Link>
                                 <Nav.Link href="/login">Log In</Nav.Link>
                                 <Nav.Link href="/registration">Registration</Nav.Link>
-                                <Nav.Link href="/application">Application</Nav.Link>
+                                <Nav.Link onClick={() => authorize()}>Application</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>

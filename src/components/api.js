@@ -4,12 +4,13 @@
  * @param {string} location 
  * @param {JSON} JSONdata 
  */
-const ApiCall = (httpMethod, location, JSONdata) => {
+const ApiCall = (httpMethod, location, JSONdata, authToken) => {
 
   return fetch("https://desolate-escarpment-74430.herokuapp.com/" + location, {
     method: httpMethod,
     headers: {
-      "Content-Type":"application/json"
+      "Content-Type":"application/json",
+      'Authorization': 'Bearer' + authToken
     },
     body: JSON.stringify(JSONdata)
   },
