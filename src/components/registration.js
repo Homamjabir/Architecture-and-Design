@@ -48,7 +48,7 @@ const Registration = () => {
   const schema = yup.object().shape({
     firstName: yup.string().required("First name required"),
     lastName: yup.string().required("Last name required"),
-    dob: yup.number("Enter a number").required("Date of birth required").positive("Positive number").integer("Number").min(12, "12 digits").max(12, "12 digits"),
+    dob: yup.number("Enter a number").required("Date of birth required").positive("Positive number").integer("Number"),
     username: yup.string().required("Username required"),
     email: yup.string().email('Invalid email').required('Email required'),
     password: yup.string().required("Password requierd"),
