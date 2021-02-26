@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Form'
@@ -10,6 +11,7 @@ import "./css/registration.css"
 
 
 const Registration = () => {
+  const history = useHistory();
 
   const [initialValues, setInitialValues] = useState({
     firstName: '',
@@ -38,7 +40,8 @@ const Registration = () => {
    */
   const onSubmit = (values) => {
     ApiCall("POST", "api/applicant/signup", values, null).then(response => {
-      alert("registration succesfull");
+      history.push('/login')
+      //alert("registration succesfull");
     }).catch(error => {
       alert(error.message);
     })
