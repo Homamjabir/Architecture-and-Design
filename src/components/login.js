@@ -32,7 +32,7 @@ const Login = ({setSessionToken}) => {
    */
   const onSubmit = (values) => {
     setSessionToken("tjena")
-    ApiCall("POST", "api/applicant/login", values).then(response => {
+    ApiCall("POST", "api/applicant/login", values, null).then(response => {
       alert("login succesfull");
       setSessionToken(response.TOKEN)
       console.log(response)

@@ -37,11 +37,11 @@ const Registration = () => {
    * @param {JSON} values 
    */
   const onSubmit = (values) => {
-    /*    ApiCall("POST", "api/applicant/signup", values).then(response => {
+    ApiCall("POST", "api/applicant/signup", values, null).then(response => {
       alert("registration succesfull");
     }).catch(error => {
       alert(error.message);
-    })*/
+    })
  
   }
 
