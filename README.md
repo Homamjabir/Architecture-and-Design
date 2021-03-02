@@ -2,9 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## What is this repository?
+
+This is a repository containing the source code for the front-end of the recruitment system being developed as part of the course IV1201 (Architecture and Design of Global Applications). Its backend source code can be found [here](https://github.com/oldnewme/RecruitmentApp).
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+Installs the dependencies specified in the project's package.json file. You should run this command before running the start command below to avoid errors caused by missing dependencies.
 
 ### `npm start`
 
