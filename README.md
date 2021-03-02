@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## What is this repository?
 
-This is a repository containing the source code for the front-end of the recruitment system being developed as part of the course IV1201 (Architecture and Design of Global Applications). Its backend source code can be found [here](https://github.com/oldnewme/RecruitmentApp).
+This is a repository containing the source code for the front-end of the recruitment system being developed as part of the course IV1201 (Architecture and Design of Global Applications). Its backend source code can be found [here](https://github.com/oldnewme/RecruitmentApp). Please note that you need to have npm installed to run this project, if you don't have it installed, follow the instructions [here](https://www.npmjs.com/get-npm).
 
 ## Available Scripts
 
