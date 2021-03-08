@@ -6,7 +6,7 @@
  */
 const ApiCall = (httpMethod, location, JSONdata, authToken) => {
 
-  return fetch("https://recruitmebackend.herokuapp.com/" + location, {
+  return fetch("http://localhost:8000/" + location, {
     method: httpMethod,
     headers: {
       "Content-Type":"application/json",
