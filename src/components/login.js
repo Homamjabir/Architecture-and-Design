@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Form'
@@ -6,11 +7,15 @@ import Nav from 'react-bootstrap/Nav'
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import  ApiCall  from "./api"
+import { Trans, useTranslation } from 'react-i18next';
 import "./css/login.css"
 
 const Login = ({setSessionToken}) => {
+  const { t, i18n } = useTranslation();
+  const history = useHistory();
 
   const [initialValues, setInitialValues] = useState({
+    email: '',
     username: '',
     password: ''
   });
@@ -31,21 +36,33 @@ const Login = ({setSessionToken}) => {
    * @param {JSON} values 
    */
   const onSubmit = (values) => {
-    setSessionToken("tjena")
+    
+    if(validateEmail(values.username)) {
+      values.email = values.username;
+      values.username = '';
+    }
+
     ApiCall("POST", "api/applicant/login", values, null).then(response => {
       alert("login succesfull");
-      setSessionToken(response.TOKEN)
       console.log(response)
     }).catch(error => {
-      alert("invalid username or password");
+      if(error.message == "Incomplete")
+        history.push({pathname: "/incomplete", state: { "username": values.username, "email": values.email, "password": values.password}})
+      else
+        alert("invalid username or password");
     })
     
   }
 
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   
   const schema = yup.object().shape({
-    username: yup.string().required(),
-    password: yup.string().required(),
+    username: yup.string().required(t("validationUsernameOrPassword")),
+    password: yup.string().required(t("validationPassword")),
   });
 
 
@@ -68,11 +85,11 @@ const Login = ({setSessionToken}) => {
 
               <Form.Row>
 
-                <Form.Group as={Col} md="6" >
-                  <Form.Label>Username</Form.Label>
+                <Form.Group className="mr-3" as={Col} md="6" >
+                  <Form.Label>{t("logUsernameOrEmail")}</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Username"
+                    
                     name="username"
                     defaultValue={initialValues.username}
                     onChange={onChange}
@@ -86,10 +103,10 @@ const Login = ({setSessionToken}) => {
 
 
                 <Form.Group as={Col} md="6" >
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>{t("regPassword")}</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Password"
+                    
                     name="password"
                     defaultValue={initialValues.password}
                     onChange={onChange}
@@ -103,13 +120,13 @@ const Login = ({setSessionToken}) => {
 
               </Form.Row>
 
-              <Button type="submit">Log in</Button>
+              <Button type="submit">{t("logButton")}</Button>
             </Form>
           )}
         </Formik>
       </div>
       <p>
-        Dont have an account? <Nav.Link href="/registration"><strong>Sign up here</strong></Nav.Link>
+        {t("logText.text1")} <Nav.Link href="/registration"><strong>{t("logText.text2")}</strong></Nav.Link>
       </p>
     </div>
   );
