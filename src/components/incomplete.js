@@ -30,11 +30,11 @@ const Incomplete = () => {
   const whatToShow = (userCredentials) => {
     if(userCredentials.email === "") {
       setShowEmailForm(true);
-      initialValues.username = "tempString";
+      initialValues.username = location.state.username;
     }
     else {
       setShowEmailForm(false);
-      initialValues.email = "tempString";
+      initialValues.email = location.state.email;
     }
   }
 
@@ -60,9 +60,9 @@ const Incomplete = () => {
    */
   const onSubmit = (values) => {
 
-      values.username = location.state.username;
+      //values.username = location.state.username;
       values.password = location.state.password;
-
+      console.log(values)
     ApiCall("POST", "api/applicant/update", values, null).then(response => {
       
       //alert("registration succesfull");
