@@ -41,13 +41,19 @@ const Login = ({setSessionToken}) => {
       values.email = values.username;
       values.username = '';
     }
+    else {
+      values.email = '';
+    }
+    console.log(values)
 
     ApiCall("POST", "api/applicant/login", values, null).then(response => {
       alert("login succesfull");
       console.log(response)
+      
     }).catch(error => {
-      if(error.message == "Incomplete")
-        history.push({pathname: "/incomplete", state: { "username": values.username, "email": values.email, "password": values.password}})
+      console.log(error.accessToken)
+      if(error.accessToken !== undefined)
+        history.push({pathname: "/incomplete", state: { "username": values.username, "email": values.email, "password": values.password, "accessToken": error.accessToken}})
       else
         alert("invalid username or password");
     })

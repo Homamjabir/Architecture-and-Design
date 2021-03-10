@@ -63,11 +63,10 @@ const Incomplete = () => {
       //values.username = location.state.username;
       values.password = location.state.password;
       console.log(values)
-    ApiCall("POST", "api/applicant/update", values, null).then(response => {
-      
+    ApiCall("POST", "api/applicant/update", values, location.state.accessToken).then(response => {
       //alert("registration succesfull");
     }).catch(error => {
-      alert(error.message);
+      alert(error.error);
     })
   }
 

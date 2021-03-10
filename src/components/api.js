@@ -10,7 +10,7 @@ const ApiCall = (httpMethod, location, JSONdata, authToken) => {
     method: httpMethod,
     headers: {
       "Content-Type":"application/json",
-      'Authorization': 'Bearer' + authToken
+      'Authorization': 'Bearer ' + authToken
     },
     body: JSON.stringify(JSONdata)
   },
@@ -22,8 +22,7 @@ const ApiCall = (httpMethod, location, JSONdata, authToken) => {
       }
   }).then(data => {return data}
   ).catch(error => {
-    console.log(error.error)
-    throw new Error(error.error)
+    throw error
   });
 
 }
