@@ -6,7 +6,7 @@ const transSve = {
     headerHome: "Hem",
     headerLogin: "Logga In",
     headerRegistration: "Registrering",
-    headerApplication: "Ansökan",
+    headerApplication: "Endast rekryterare",
     headerLogOut: "Logga ut",
     headerAllUser: "Alla användare",
     headerChangeLanguage: "Ändra Språk",
@@ -44,6 +44,10 @@ const transSve = {
 
     incompleteText: "Du har ofullständiga uppgifter i databasen. Fyll i formuläret nedan för att uppdatera uppgifterna",
     incompleteButton: "Uppdatera data",
+
+    allUsersText: "Alla inloggade användare har tillgång till denna sida",
+
+    applicationPage: "Endast rekrytera kan se denna sida"
 }
 
 export default transSve

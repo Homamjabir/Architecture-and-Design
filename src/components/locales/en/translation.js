@@ -5,7 +5,7 @@ const transEng = {
     headerHome: "Home",
     headerLogin: "Log In",
     headerRegistration: "Registration",
-    headerApplication: "Application",
+    headerApplication: "Only recruiter",
     headerLogOut: "Log out",
     headerAllUser: "All users",
     headerChangeLanguage: "Change Language",
@@ -42,6 +42,10 @@ const transEng = {
 
     incompleteText: "You have incomplete data in the database. Please fill in the form bellow to update the data",
     incompleteButton: "Update data",
+
+    allUsersText: "All logged in users can enter this page",
+
+    applicationPage: "Only recruiters can view this page"
 
     
 }
