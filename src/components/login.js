@@ -23,8 +23,8 @@ const Login = () => {
   };  
 
   const onSubmit = (values, {resetForm}) => {
-    ApiCall("POST", "api/applicant/login", values).then(response => {
-      alert("login succesfull");
+    ApiCall("POST", "api/person/login", values).then(response => {
+      alert("login succesful");
       console.log(response)
     }).catch(error => {
       alert(error.message);
