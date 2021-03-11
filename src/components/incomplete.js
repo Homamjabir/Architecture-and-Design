@@ -13,9 +13,9 @@ const Incomplete = () => {
 
   const [showEmailForm, setShowEmailForm] = useState(false);
   const [initialValues, setInitialValues] = useState({
-    firstName: '',
-    lastName: '',
-    dob: '',
+    name: '',
+    surname: '',
+    ssn: '',
     email: '',
     username: ''
   });
@@ -23,7 +23,7 @@ const Incomplete = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.state)
+    
     whatToShow(location.state)
   },[])
 
@@ -46,7 +46,7 @@ const Incomplete = () => {
    * @param {event} event 
    */
   const onChange = (event) => {
-    console.log(event.target.value)
+   
     setInitialValues(prevState =>  ({
       ...prevState,
       [event.target.name] : event.target.value
@@ -63,17 +63,19 @@ const Incomplete = () => {
       //values.username = location.state.username;
       values.password = location.state.password;
       console.log(values)
-    ApiCall("POST", "api/applicant/update", values, location.state.accessToken).then(response => {
+      
+    ApiCall("POST", "api/person/update", values, location.state.accessToken).then(response => {
       //alert("registration succesfull");
+      console.log(response)
     }).catch(error => {
       alert(error.error);
     })
   }
 
   const schema = yup.object().shape({
-    firstName: yup.string().required(t("validationFirstName")),
-    lastName: yup.string().required(t("validationLastName")),
-    dob: yup.number("Enter a number").required(t("validationDOB")).positive("Positive number").integer("Number"),
+    name: yup.string().required(t("validationFirstName")),
+    surname: yup.string().required(t("validationLastName")),
+    ssn: yup.number("Enter a number").required(t("validationDOB")).positive("Positive number").integer("Number"),
     // email: yup.string().email(t("validationEmail.inv")).required(t("validationEmail.req")),
     // username: yup.string().required(t("validationUsername"))
   });
@@ -104,14 +106,14 @@ const Incomplete = () => {
                   <Form.Label>{t("regFirstName")}</Form.Label>
                   <Form.Control
                     type="text"
-                    name="firstName"
-                    defaultValue={initialValues.firstName}
+                    name="name"
+                    defaultValue={initialValues.name}
                     onChange={onChange}
-                    isInvalid={errors.firstName}
+                    isInvalid={errors.name}
                   />
 
                   <Form.Control.Feedback type="invalid">
-                    {errors.firstName}
+                    {errors.name}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -119,14 +121,14 @@ const Incomplete = () => {
                   <Form.Label>{t("regLastName")}</Form.Label>
                   <Form.Control
                     type="text"
-                    name="lastName"
-                    defaultValue={initialValues.lastName}
+                    name="surname"
+                    defaultValue={initialValues.surname}
                     onChange={onChange}
-                    isInvalid={errors.lastName}
+                    isInvalid={errors.surname}
                   />
 
                   <Form.Control.Feedback type="invalid">
-                    {errors.lastName}
+                    {errors.surname}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -139,14 +141,14 @@ const Incomplete = () => {
                   <Form.Label>{t("regDOB")}</Form.Label>
                   <Form.Control
                     type="text"
-                    name="dob"
-                    defaultValue={initialValues.dob}
+                    name="ssn"
+                    defaultValue={initialValues.ssn}
                     onChange={onChange}
-                    isInvalid={!!errors.dob}
+                    isInvalid={!!errors.ssn}
                   />
 
                   <Form.Control.Feedback type="invalid">
-                    {errors.dob}
+                    {errors.ssn}
                   </Form.Control.Feedback>
                 </Form.Group>
 

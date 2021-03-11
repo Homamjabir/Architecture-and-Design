@@ -7,6 +7,8 @@ const transSve = {
     headerLogin: "Logga In",
     headerRegistration: "Registrering",
     headerApplication: "Ansökan",
+    headerLogOut: "Logga ut",
+    headerAllUser: "Alla användare",
     headerChangeLanguage: "Ändra Språk",
 
     regFirstName: "Förnamn",

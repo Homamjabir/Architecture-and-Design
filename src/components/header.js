@@ -2,48 +2,85 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import i18n from "i18next";
-import { Trans, useTranslation } from 'react-i18next';
-import  ApiCall  from "./api"
+import { useTranslation } from 'react-i18next';
 import "./css/header.css"
 
 var count = 1;
-const Header = ({sessionToken}) =>  {
+const Header = ({sessionToken, setSessionToken}) =>  {
         const history = useHistory();
 
         
-        const { t, i18n } = useTranslation();
+const ApiCallGet = (location, authToken) => {
 
-        const onClick = () => {
-            console.log(count)
-            if(count % 2 === 0)
-                i18n.changeLanguage("sv");
-            else
-                i18n.changeLanguage("en")
-            count++;
-            console.log(count)
+    return fetch("http://localhost:8000/" + location, {
+      method: "GET",
+      headers: {
+        "Content-Type":"application/json",
+        'Authorization': 'Bearer ' + authToken
+      },
+    },
+    ).then(response => {
+        if(response.status >= 200 && response.status <= 299) 
+          return response.json();
+        else {
+          return response.json().then(err => Promise.reject(err));
         }
+    }).then(data => {return data}
+    ).catch(error => {
+      throw error
+    });
+  }
 
-        if(window.location.pathname === '/')
-            return null;
-        else 
-            return (
-                <div className = "headerContainer">
-                    <Navbar className="navbar" variant="dark" expand="lg">
-                        <Navbar.Brand href="#home">{t("headerText")}</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="mr-auto">
-                                <Nav.Link href="/">{t("headerHome")}</Nav.Link>
-                                <Nav.Link href="/login">{t("headerLogin")}</Nav.Link>
-                                <Nav.Link href="/registration">{t("headerRegistration")}</Nav.Link>
-                                <Nav.Link >{t("headerApplication")}</Nav.Link>
-                                <Nav.Link onClick={onClick}>{t("headerChangeLanguage")}</Nav.Link>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
-                </div>
-            );
+        
+    const { t, i18n } = useTranslation();
+
+    const onClick = () => {
+        console.log(count)
+        if(count % 2 === 0)
+            i18n.changeLanguage("sv");
+        else
+            i18n.changeLanguage("en")
+        count++;
+        console.log(count)
+    }
+
+    const authorize = (route, goTO) => {
+        ApiCallGet("api/person/" + route, sessionToken).then(respsone => {
+            console.log(respsone)
+            history.push({pathname: "/"+goTO})
+        }).catch(error => {
+            alert("NOT AUTHORIZED")
+            
+        })
+    }
+
+    const logOut = () => {
+        setSessionToken(null)
+        history.push({pathname: "/login"})
+    }
+
+    if(window.location.pathname === '/')
+        return null;
+    else 
+        return (
+            <div className = "headerContainer">
+                <Navbar className="navbar" variant="dark" expand="lg">
+                    <Navbar.Brand href="#home">{t("headerText")}</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link href="/">{t("headerHome")}</Nav.Link>
+                            <Nav.Link href="/login">{t("headerLogin")}</Nav.Link>
+                            <Nav.Link href="/registration">{t("headerRegistration")}</Nav.Link>
+                            <Nav.Link onClick={()=>authorize("protected", "application")}>{t("headerApplication")}</Nav.Link>
+                            <Nav.Link onClick={()=>authorize("all-users", "all-users")}>{t("headerAllUser")}</Nav.Link>
+                            <Nav.Link onClick={()=>logOut()}>{t("headerLogOut")}</Nav.Link>
+                            <Nav.Link onClick={onClick}>{t("headerChangeLanguage")}</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
+        );
       
     
   }

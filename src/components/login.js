@@ -44,14 +44,14 @@ const Login = ({setSessionToken}) => {
     else {
       values.email = '';
     }
-    console.log(values)
+    
 
-    ApiCall("POST", "api/applicant/login", values, null).then(response => {
+    ApiCall("POST", "api/person/login", values, null).then(response => {
       alert("login succesfull");
-      console.log(response)
+      setSessionToken(response.accessToken)
       
     }).catch(error => {
-      console.log(error.accessToken)
+      
       if(error.accessToken !== undefined)
         history.push({pathname: "/incomplete", state: { "username": values.username, "email": values.email, "password": values.password, "accessToken": error.accessToken}})
       else

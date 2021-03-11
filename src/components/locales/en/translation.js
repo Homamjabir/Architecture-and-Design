@@ -6,7 +6,10 @@ const transEng = {
     headerLogin: "Log In",
     headerRegistration: "Registration",
     headerApplication: "Application",
+    headerLogOut: "Log out",
+    headerAllUser: "All users",
     headerChangeLanguage: "Change Language",
+
     regFirstName: "First name",
     regLastName: "Last name",
     regDOB: "Date of birth",

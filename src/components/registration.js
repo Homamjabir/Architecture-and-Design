@@ -16,12 +16,13 @@ const Registration = () => {
   const { t, i18n } = useTranslation();
 
   const [initialValues, setInitialValues] = useState({
-    firstName: '',
-    lastName: '',
-    dob: '',
+    name: '',
+    surname: '',
+    ssn: '',
     username: '',
     email: '',
-    password: ''
+    password: '',
+    roleId: 2,
   });
 
   /**
@@ -41,19 +42,21 @@ const Registration = () => {
    * @param {JSON} values 
    */
   const onSubmit = (values) => {
-    ApiCall("POST", "api/applicant/signup", values, null).then(response => {
+    console.log(values)
+    ApiCall("POST", "api/person/signup", values, null).then(response => {
       history.push('/login')
       //alert("registration succesfull");
     }).catch(error => {
-      alert(error.message);
+      console.log(error)
+      alert(error.error);
     })
  
   }
 
   const schema = yup.object().shape({
-    firstName: yup.string().required(t("validationFirstName")),
-    lastName: yup.string().required(t("validationLastName")),
-    dob: yup.number("Enter a number").required(t("validationDOB")).positive("Positive number").integer("Number")/*.test('len', t("validationDOBLength"), val => val.length === 12)*/,
+    name: yup.string().required(t("validationFirstName")),
+    surname: yup.string().required(t("validationLastName")),
+    ssn: yup.number("Enter a number").required(t("validationDOB")).positive("Positive number").integer("Number")/*.test('len', t("validationDOBLength"), val => val.length === 12)*/,
     username: yup.string().required(t("validationUsername")),
     email: yup.string().email(t("validationEmail.inv")).required(t("validationEmail.req")),
     password: yup.string().required(t("validationPassword")),
@@ -82,14 +85,14 @@ const Registration = () => {
                   <Form.Control
                     type="text"
                     
-                    name="firstName"
-                    defaultValue={initialValues.firstName}
+                    name="name"
+                    defaultValue={initialValues.name}
                     onChange={onChange}
-                    isInvalid={errors.firstName}
+                    isInvalid={errors.name}
                   />
 
                   <Form.Control.Feedback type="invalid">
-                    {errors.firstName}
+                    {errors.name}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -98,14 +101,14 @@ const Registration = () => {
                   <Form.Control
                     type="text"
                     
-                    name="lastName"
-                    defaultValue={initialValues.lastName}
+                    name="surname"
+                    defaultValue={initialValues.surname}
                     onChange={onChange}
-                    isInvalid={errors.lastName}
+                    isInvalid={errors.surname}
                   />
 
                   <Form.Control.Feedback type="invalid">
-                    {errors.lastName}
+                    {errors.surname}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -119,14 +122,14 @@ const Registration = () => {
                   <Form.Control
                     type="text"
                     
-                    name="dob"
-                    defaultValue={initialValues.dob}
+                    name="ssn"
+                    defaultValue={initialValues.ssn}
                     onChange={onChange}
-                    isInvalid={!!errors.dob}
+                    isInvalid={!!errors.ssn}
                   />
 
                   <Form.Control.Feedback type="invalid">
-                    {errors.dob}
+                    {errors.ssn}
                   </Form.Control.Feedback>
                 </Form.Group>
 

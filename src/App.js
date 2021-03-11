@@ -6,6 +6,7 @@ import Login from "./components/login"
 import Registration from "./components/registration";
 import Application from "./components/application";
 import Incomplete from "./components/incomplete";
+import AllUsers from "./components/all-users"
 import Header from "./components/header";
 import Footer from "./components/footer"
 import i18n from "i18next";
@@ -20,7 +21,7 @@ export default function App() {
         <div className="App">
 			
 			<header className="App-header">
-				<Header sessionToken={sessionToken}/>
+				<Header sessionToken={sessionToken} setSessionToken={setSessionToken}/>
 			</header>
 
           	<Route
@@ -42,6 +43,10 @@ export default function App() {
 			<Route
 				exact path="/incomplete"
 				render={() => <Incomplete/>}
+			/>
+			<Route
+				exact path="/all-users"
+				render={() => <AllUsers/>}
 			/>
 
 			<footer>
